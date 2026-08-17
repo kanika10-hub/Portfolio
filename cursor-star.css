@@ -1,1 +1,19 @@
-.cursor-dot{display:none}.cursor-ring{width:24px;height:24px;border:0!important;border-radius:0;background:linear-gradient(135deg,#fff 8%,#fff9e8 45%,#fff2cc 100%);clip-path:polygon(50% 0%,60% 36%,100% 50%,60% 62%,50% 100%,40% 62%,0% 50%,40% 36%);filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 7px rgba(255,242,204,.95)) drop-shadow(0 0 15px rgba(255,242,204,.55));animation:starHeartbeat 1.25s ease-in-out infinite;transition:width .22s,height .22s,filter .22s;background-color:#fff9e8}.cursor-ring::before{content:'';position:absolute;inset:23%;background:#fff;border-radius:50%;filter:blur(1px)}.cursor-ring.hover{width:39px;height:39px;border:0!important;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 12px #fff2cc) drop-shadow(0 0 24px rgba(255,242,204,.9));animation-duration:.72s}@keyframes starHeartbeat{0%,100%{transform:translate(-50%,-50%) scale(1)}14%{transform:translate(-50%,-50%) scale(1.18)}28%{transform:translate(-50%,-50%) scale(.98)}42%{transform:translate(-50%,-50%) scale(1.12)}58%{transform:translate(-50%,-50%) scale(1)}}@media(max-width:760px){.cursor-ring{display:none}}
+/* Solid white four-point star cursor with magnetic snap.
+   .cursor-dot / .cursor-ring are zero-size positioners moved by script.js;
+   the visuals live on ::after so the JS transform stays purely positional
+   while CSS transitions the snap (size + radius + fill). */
+
+.cursor-dot,.cursor-ring,.cursor-ring.hover{position:fixed;left:0;top:0;width:0;height:0;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;animation:none;pointer-events:none;z-index:60;opacity:0;transition:opacity .3s ease}
+body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{opacity:1}
+
+.cursor-dot::after,.cursor-ring::after{content:'';position:absolute;left:0;top:0;transform:translate(-50%,-50%)}
+
+/* four-point star, edges bowed inward toward centre — fixed size, never scales */
+.cursor-dot::after{width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 0Q13.8 10.2 24 12Q13.8 13.8 12 24Q10.2 13.8 0 12Q10.2 10.2 12 0Z'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* outer frame — 40px ring at rest, flattens into the target box on snap */
+.cursor-ring::after{width:var(--cw,40px);height:var(--ch,40px);border:1px solid rgba(255,255,255,.55);background:transparent;border-radius:var(--crad,50%);transition:width .28s cubic-bezier(.2,.8,.2,1),height .28s cubic-bezier(.2,.8,.2,1),border-radius .28s ease,background-color .28s ease,border-color .28s ease}
+body[data-cursor="stuck"] .cursor-ring::after{border-color:rgba(255,255,255,.8);background:rgba(255,255,255,.09)}
+
+@media(prefers-reduced-motion:reduce){.cursor-dot,.cursor-ring,.cursor-ring::after{transition-duration:.01ms}}
+@media(max-width:760px){.cursor-dot,.cursor-ring{display:none}}

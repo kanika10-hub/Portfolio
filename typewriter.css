@@ -1,0 +1,8 @@
+/* Typing animation styles for hero name */
+.hero-title{width:100%;text-align:center}
+.hero-title .typewriter{display:block;margin:18px auto 0;max-width:100%}
+#type-text{display:inline-block;color:var(--cream);font-weight:800;letter-spacing:-0.03em;line-height:1.05;font-family:Manrope,Arial,sans-serif;font-size:48px}
+.type-cursor{display:inline-block;margin-left:8px;color:var(--cream);font-weight:800;animation:blink 1s steps(2,end) infinite}
+@media(min-width:760px){#type-text{font-size:72px}}
+@media(min-width:1024px){#type-text{font-size:96px}}
+@keyframes blink{50%{opacity:0}}
