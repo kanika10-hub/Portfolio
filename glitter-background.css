@@ -1,3 +1,3 @@
 /* Full-page adaptation of GlitterWrap's canvas layer. */
-#particles{z-index:0!important;opacity:.32!important;mix-blend-mode:screen}body>main,body>nav,body>footer,body>.fixed-resume{position:relative;z-index:1}.ambient{z-index:0}.grain{z-index:7}.cursor-dot,.cursor-ring,.resume-modal{z-index:30}
+#particles{z-index:0!important;opacity:.32!important}body>main,body>nav,body>footer,body>.fixed-resume{position:relative;z-index:1}.ambient{z-index:0}.grain{z-index:7}.cursor-dot,.cursor-ring,.resume-modal{z-index:30}
 @media(max-width:760px){#particles{opacity:.22!important}}
